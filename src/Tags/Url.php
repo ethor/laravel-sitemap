@@ -17,7 +17,7 @@ class Url extends Tag
 
     public string $url;
 
-    public Carbon $lastModificationDate;
+    public ?Carbon $lastModificationDate;
 
     public string $changeFrequency;
 
@@ -47,9 +47,15 @@ class Url extends Tag
         return $this;
     }
 
-    public function setLastModificationDate(DateTimeInterface $lastModificationDate): static
+    public function setLastModificationDate(?DateTimeInterface $lastModificationDate): static
     {
-        $this->lastModificationDate = Carbon::instance($lastModificationDate);
+        if(!is_null($lastModificationDate)) {
+            $this->lastModificationDate = Carbon::instance($lastModificationDate);
+        }
+        else {
+            $this->lastModificationDate = null;
+        }
+        
 
         return $this;
     }
